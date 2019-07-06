@@ -12,6 +12,7 @@ To run the build
 
 To run the build:
 
-1. Install jake: 'npm install jake -g'
-2. Run jake: 'jake'
-Type 'jake' in the terminal in the directory the file Jakefile.js is located.
+1. Install jake: 'npm install jake --no-scripts'
+2. 'npm rebuild'
+3. Run jake: 'jake'
+Type 'node_modules/.bin/jake' in the terminal in the directory the file Jakefile.js is located.
