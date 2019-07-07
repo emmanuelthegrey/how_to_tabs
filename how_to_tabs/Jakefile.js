@@ -1,7 +1,7 @@
 (function() {
 	"use strict";
    
-
+var semver = require("semver");
 
     desc("Default build");
     task("default",["version"],function(){
@@ -12,12 +12,12 @@ task("version", function(){
 console.log("checking node version");
 
 var packageJson = require("./package.json")
-var expectedNodeVersion = "v" + packageJson.engines.node;
+var expectedNodeVersion = packageJson.engines.node;
 
 
 let actualVersion = process.version;
 
-if(actualVersion !== expectedNodeVersion){
+if(semver.neq(expectedNodeVersion,actualVersion)){
     fail("current version of node :" + actualVersion+ "does not work. Version :" + expectedNodeVersion + "Needed.")
 }
 
