@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jake": "^8.1.1",
     "semver": "^6.2.0"
   }
 }
