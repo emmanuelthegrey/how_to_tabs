@@ -1,7 +1,7 @@
 {
   "name": "how_to_tabs",
   "version": "1.0.0",
-  "private":true,
+  "private": true,
   "engines": {
     "node": "10.16.0"
   },
@@ -11,5 +11,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "semver": "^6.2.0"
+  }
 }
