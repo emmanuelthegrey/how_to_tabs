@@ -26,7 +26,7 @@
             process.stdout.write("Linting JS");
             //jake.exec("node node_modules/jshint/bin/jshint Jakefile.js", {interactive:true}, complete);
             jshint.checkFiles({
-                files: "Jakefile.js",
+                files: ["Jakefile.js", "src/**/*.js"],
                 options: {
                     bitwise: true,
                     curly: true,
