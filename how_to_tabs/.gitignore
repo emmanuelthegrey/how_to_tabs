@@ -10,3 +10,6 @@
 
 
 HowToTabs.code-workspace
+
+#Binary for Karma
+node_modules/fsevents/lib/
