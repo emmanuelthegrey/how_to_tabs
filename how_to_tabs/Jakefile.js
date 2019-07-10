@@ -45,7 +45,15 @@
                     node: true,
                     browser: true,
                 },
-                globals: {}
+                globals: {
+                    //Mocha globals
+                    describe:false,
+                    it:false,
+                    before:false,
+                    after:false,
+                    beforeEach:false,
+                    afterEach:false
+                }
             }, complete, fail);
         }, { async: true });
 
