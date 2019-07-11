@@ -27,35 +27,43 @@
             //jake.exec("node node_modules/jshint/bin/jshint Jakefile.js", {interactive:true}, complete);
             jshint.checkFiles({
                 files: ["Jakefile.js", "src/**/*.js"],
-                options: {
-                    bitwise: true,
-                    curly: true,
-                    eqeqeq: true,
-                    forin: true,
-                    freeze: true,
-                    futurehostile: true,
-                    latedef: "nofunc",
-                    nocomma: true,
-                    nonbsp: true,
-                    nonew: true,
-                    strict: true,
-                    undef: true,
-
-
-                    node: true,
-                    browser: true,
-                },
-                globals: {
-                    //Mocha globals
-                    describe:false,
-                    it:false,
-                    before:false,
-                    after:false,
-                    beforeEach:false,
-                    afterEach:false
-                }
+                options: lintOptions(),
+                globals: lintGlobals()
             }, complete, fail);
         }, { async: true });
+
+        function lintOptions(){
+          return  {
+                bitwise: true,
+                curly: true,
+                eqeqeq: true,
+                forin: true,
+                freeze: true,
+                futurehostile: true,
+                latedef: "nofunc",
+                nocomma: true,
+                nonbsp: true,
+                nonew: true,
+                strict: true,
+                undef: true,
+
+
+                node: true,
+                browser: true,
+            };
+        }
+
+        function lintGlobals(){
+            return {
+                //Mocha globals
+                describe:false,
+                it:false,
+                before:false,
+                after:false,
+                beforeEach:false,
+                afterEach:false
+            };
+        }
 
     desc("Check Node Version");
     task("version", function () {
