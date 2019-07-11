@@ -5,70 +5,83 @@
 
     var semver = require("semver");
     var jshint = require("simplebuild-jshint");
+    var karma = require("simplebuild-karma");
+    var KARMA_CONFIG = "karma.conf.js";
 
     //**** General Purpose Tasks
 
     desc("Start the Karma Server (Do this first)");
-    task("karmaStart", function(){
+    task("karmaStart", function () {
         console.log("Karma Server started");
-    });
+        karma.start({
+            configFile: KARMA_CONFIG
+        }, complete, fail);
+    }, { async: true });
 
     desc("Default build");
-    task("default", ["version", "lint"], function () {
+    task("default", ["version", "lint", "test"], function () {
         console.log("\n\n Build OK");
     });
 
     desc("Run a localhost server");
-    task("run",function(){
+    task("run", function () {
         console.log("Starting local host server");
-        jake.exec("node node_modules/http-server/bin/http-server src", {interactive:true}, complete);
-    },{async:true});
+        jake.exec("node node_modules/http-server/bin/http-server src", { interactive: true }, complete);
+    }, { async: true });
 
     //**** Supporting Tasks
 
+    desc("Run Tests");
+    task("test", function () {
+        console.log("Testing Javascript: ");
+        karma.run({
+            configFile: KARMA_CONFIG
+        }, complete, fail);
+    }, { async: true });
+
     desc("Lint code for errors");
-        task("lint", function () {
-            process.stdout.write("Linting JS");
-            //jake.exec("node node_modules/jshint/bin/jshint Jakefile.js", {interactive:true}, complete);
-            jshint.checkFiles({
-                files: ["Jakefile.js", "src/**/*.js"],
-                options: lintOptions(),
-                globals: lintGlobals()
-            }, complete, fail);
-        }, { async: true });
+    task("lint", function () {
+        process.stdout.write("Linting JS");
+        //jake.exec("node node_modules/jshint/bin/jshint Jakefile.js", {interactive:true}, complete);
+        jshint.checkFiles({
+            files: ["Jakefile.js", "src/**/*.js"],
+            options: lintOptions(),
+            globals: lintGlobals()
+        }, complete, fail);
+    }, { async: true });
 
-        function lintOptions(){
-          return  {
-                bitwise: true,
-                curly: true,
-                eqeqeq: true,
-                forin: true,
-                freeze: true,
-                futurehostile: true,
-                latedef: "nofunc",
-                nocomma: true,
-                nonbsp: true,
-                nonew: true,
-                strict: true,
-                undef: true,
+    function lintOptions() {
+        return {
+            bitwise: true,
+            curly: true,
+            eqeqeq: true,
+            forin: true,
+            freeze: true,
+            futurehostile: true,
+            latedef: "nofunc",
+            nocomma: true,
+            nonbsp: true,
+            nonew: true,
+            strict: true,
+            undef: true,
 
 
-                node: true,
-                browser: true,
-            };
-        }
+            node: true,
+            browser: true,
+        };
+    }
 
-        function lintGlobals(){
-            return {
-                //Mocha globals
-                describe:false,
-                it:false,
-                before:false,
-                after:false,
-                beforeEach:false,
-                afterEach:false
-            };
-        }
+    function lintGlobals() {
+        return {
+            //Mocha globals
+            describe: false,
+            it: false,
+            before: false,
+            after: false,
+            beforeEach: false,
+            afterEach: false
+        };
+    }
 
     desc("Check Node Version");
     task("version", function () {
