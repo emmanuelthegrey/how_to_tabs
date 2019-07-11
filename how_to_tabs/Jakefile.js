@@ -8,6 +8,11 @@
 
     //**** General Purpose Tasks
 
+    desc("Start the Karma Server (Do this first)");
+    task("karmaStart", function(){
+        console.log("Karma Server started");
+    });
+
     desc("Default build");
     task("default", ["version", "lint"], function () {
         console.log("\n\n Build OK");
