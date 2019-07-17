@@ -1,5 +1,5 @@
 
-/*  globals jake:false, desc:false, task:false, complete:false, fail:false */
+/*  globals jake:false, desc:false, task:false, complete:false, fail:false, directory:false */
 
 (function () {
     "use strict";
@@ -23,7 +23,7 @@
     desc("Default build");
     task("default", ["version", "lint", "test"], function () {
         console.log("\n\n Build OK");
-    });
+    }, { async: true });
 
     desc("Run a localhost server");
     task("run", ["build"], function () {
@@ -47,7 +47,7 @@
     task("clean", function () {
         console.log("Erasing generated files: .");
         shell.rm("-rf", "GeneratedCode");
-    });
+    }, { async: true });
 
     directory(DIST_DIR);
 
@@ -128,6 +128,6 @@
             fail("current version of node :" + actualVersion + "does not work. Version :" + expectedNodeVersion + "Needed.");
         }
 
-    });
+    }, { async: true });
 
 }());
