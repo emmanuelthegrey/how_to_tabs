@@ -1,3 +1,4 @@
+
 /*  globals jake:false, desc:false, task:false, complete:false, fail:false */
 
 (function () {
@@ -7,7 +8,7 @@
     var jshint = require("simplebuild-jshint");
     var karma = require("simplebuild-karma");
     var KARMA_CONFIG = "karma.conf.js";
-
+    var DIST_DIR = "GeneratedCode/dist";
     //**** General Purpose Tasks
 
     desc("Start the Karma Server (Do this first)");
@@ -24,12 +25,24 @@
     });
 
     desc("Run a localhost server");
-    task("run", function () {
+    task("run",["build"], function () {
         console.log("Starting local host server");
-        jake.exec("node node_modules/http-server/bin/http-server src", { interactive: true }, complete);
+        jake.exec("node node_modules/http-server/bin/http-server " + DIST_DIR, { interactive: true }, complete);
     }, { async: true });
 
     //**** Supporting Tasks
+
+    desc("Build distribution directory");
+    task("build", [DIST_DIR],function(){
+console.log("Building Distribution directory");
+    });
+
+    desc("Erase all generated files");
+    task("clean", function(){
+        console.log("Erasing generated files: .");
+    });
+
+    directory(DIST_DIR);
 
     desc("Run Tests");
     task("test", function () {
