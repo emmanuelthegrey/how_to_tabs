@@ -1,3 +1,3 @@
-var add = require("./addition");
+var add = require("./addition.js");
 
-console.log("10 + 5 = " + add.add(10,5));
+console.log("10 + 7 = " + add.add(10,7));

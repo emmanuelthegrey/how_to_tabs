@@ -8,6 +8,8 @@
 #Mac Os
 .DS_Store
 
+#Generated Code
+GeneratedCode/
 
 HowToTabs.code-workspace
 
