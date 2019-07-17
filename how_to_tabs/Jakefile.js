@@ -6,7 +6,8 @@
 
     var semver = require("semver");
     var jshint = require("simplebuild-jshint");
-    var karma = require("simplebuild-karma");
+    var karma = require("simplebuild-karma"); 
+    var shell = require("shell");
     var KARMA_CONFIG = "karma.conf.js";
     var DIST_DIR = "GeneratedCode/dist";
     //**** General Purpose Tasks
@@ -40,6 +41,7 @@ console.log("Building Distribution directory");
     desc("Erase all generated files");
     task("clean", function(){
         console.log("Erasing generated files: .");
+        shell.rm("-rf", "GeneratedCode");
     });
 
     directory(DIST_DIR);
