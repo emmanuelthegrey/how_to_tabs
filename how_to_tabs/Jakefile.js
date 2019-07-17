@@ -6,7 +6,7 @@
 
     var semver = require("semver");
     var jshint = require("simplebuild-jshint");
-    var karma = require("simplebuild-karma"); 
+    var karma = require("simplebuild-karma");
     var shell = require("shelljs");
     var KARMA_CONFIG = "karma.conf.js";
     var DIST_DIR = "GeneratedCode/dist";
@@ -26,7 +26,7 @@
     });
 
     desc("Run a localhost server");
-    task("run",["build"], function () {
+    task("run", ["build"], function () {
         console.log("Starting local host server");
         jake.exec("node node_modules/http-server/bin/http-server " + DIST_DIR, { interactive: true }, complete);
     }, { async: true });
@@ -34,12 +34,14 @@
     //**** Supporting Tasks
 
     desc("Build distribution directory");
-    task("build", [DIST_DIR],function(){
-console.log("Building Distribution directory");
+    task("build", [DIST_DIR], function () {
+        console.log("Building Distribution directory: .");
+        shell.rm("-rf", DIST_DIR + "/*");
+        shell.cp("src/index.html", DIST_DIR);
     });
 
     desc("Erase all generated files");
-    task("clean", function(){
+    task("clean", function () {
         console.log("Erasing generated files: .");
         shell.rm("-rf", "GeneratedCode");
     });
@@ -52,8 +54,8 @@ console.log("Building Distribution directory");
         karma.run({
             configFile: KARMA_CONFIG,
             expectedBrowsers: ["Chrome 75.0.3770 (Mac OS X 10.14.5)"
-        ],
-            strict:false
+            ],
+            strict: false
         }, complete, fail);
     }, { async: true });
 
