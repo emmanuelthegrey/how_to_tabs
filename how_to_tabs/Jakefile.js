@@ -110,14 +110,6 @@
     task("version", function () {
         console.log("checking node version");
 
-        // function deleteme(){
-        //     var a = "someString";
-
-        //     if(typeof a === "string"){
-        //         console.log("Hi");
-        //     }
-        // }
-
         var packageJson = require("./package.json");
         var expectedNodeVersion = packageJson.engines.node;
 
@@ -128,6 +120,6 @@
             fail("current version of node :" + actualVersion + "does not work. Version :" + expectedNodeVersion + "Needed.");
         }
 
-    }, { async: true });
+    });
 
 }());
