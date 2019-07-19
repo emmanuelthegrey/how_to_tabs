@@ -1,7 +1,7 @@
 (function(){
     "use strict";
 var addition = require("./addition.js");
-  var assert = require("../vendor/chai-4.2.0").assert;
+  var assert = require("./assert.js");
 describe("Addition",function(){
 
     it("Adds two numbers",function(){
