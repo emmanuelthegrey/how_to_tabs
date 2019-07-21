@@ -3,16 +3,33 @@
     var assert = require("./assert.js");
     var tabs = require("./tabs.js");
     describe("Tabs", function () {
-        it("Has an API", function () {
-            tabs.initialize();
-            // var div = document.createElement("div");
-            // div.innerHTML = "I'm a pretty cool div, I just go here";
-            // document.body.appendChild(div);
-            // var p = document.createElement("p");
-            // p.innerHTML = "A graphic representation of data abstracted from the Chinese program’s thrust...";
-            // div.appendChild(p);
-            //  div.parentNode.removeChild(div);
+        it("hides and element", function () {
+            var element = addElement("div");
+
+            tabs.initialize(element);
+
+            assert.equal(getDisplayProperty(element), "none");
+              removeElement(element);
         });
     });
 
+    function addElement(tagName){
+        var element = document.createElement(tagName);
+        document.body.appendChild(element);
+        return element;
+
+    }
+    function getDisplayProperty(element) {
+        var style = getComputedStyle(element);
+        var display = style.getPropertyValue("display");
+        return display;
+    }
+    function removeElement(element) {
+        element.parentNode.removeChild(element);
+    }
+
 }());
+
+
+
+
